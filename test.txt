@@ -1,1 +1,1 @@
-~/helm upgrade --install --namespace ba-directory ba-directory wordpress-ext-db-chart -f wordpress-ext-db-chart/ba-directory.yaml
+~/helm upgrade --install --namespace ba-directory ba-directory . -f ba-directory.yaml
