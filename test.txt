@@ -1,1 +1,1 @@
-~/helm upgrade --install --namespace ba-directory ba-directory . -f ba-directory.yaml
+~/helm upgrade --install ba-directory . -f ba-directory.yaml

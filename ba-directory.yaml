@@ -1,7 +1,6 @@
 wordpressUsername: admin
 wordpressPassword: 1234qwer
 serviceType: ClusterIP
-serviceExternalTrafficPolicy: ""
 ingress:
   enabled: true
   hosts:
@@ -10,7 +9,7 @@ ingress:
       kubernetes.io/ingress.class: nginx
       kubernetes.io/tls-acme: "true"
     tls: true
-    tlsSecret: 'wp-ba-dir-tls'
+    tlsSecret: 'wp-dir-ba-tls'
 mariadb:
   enabled: false
 externalDatabase:
