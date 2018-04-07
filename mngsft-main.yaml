@@ -4,18 +4,18 @@ serviceType: ClusterIP
 ingress:
   enabled: true
   hosts:
-  - name: 'directory.businessatlas.online'
+  - name: 'mangosoftapps.com'
     annotations:
       kubernetes.io/ingress.class: nginx
       kubernetes.io/tls-acme: "true"
       nginx.ingress.kubernetes.io/proxy-body-size: 256m
     tls: true
-    tlsSecret: 'wp-dir-ba-tls'
+    tlsSecret: 'wp-mngsft-main-tls'
 mariadb:
   enabled: false
 externalDatabase:
   host: 10.150.0.2
-  user: ba_directory
-  password: wVSI0BqhpHKxjFQaZjAeJhJe3DcKUdrqGaC1pV08
-  database: ba_directory
+  user: mngsft_main
+  password: qPshKj78XBiEZteXkm3UIr6FdINFrAknYjZ3jyiH
+  database: mngsft_main
   port: 3306

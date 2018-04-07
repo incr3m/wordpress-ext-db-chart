@@ -1,0 +1,1 @@
+more +/"businessatlas.online" /etc/nginx/nginx.conf
