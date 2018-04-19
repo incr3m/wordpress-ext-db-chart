@@ -1,0 +1,24 @@
+wordpressUsername: admin
+wordpressPassword: 1234qwer
+cloudcmdUsername: admin
+cloudcmdPassword: 1234qwer
+serviceType: ClusterIP
+ingress:
+  enabled: true
+  hosts:
+  - name: 'sidecar.staging.player.me'
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: 256m
+    tls: true
+    tlsSecret: 'sidecar-tls'
+mariadb:
+  enabled: false
+externalDatabase:
+  host: 10.138.0.3
+  user: root
+  password: 1234qwer
+  database: sidecar2
+  port: 3306
+cloudCmdSubdomain: 'cloudcmd-'

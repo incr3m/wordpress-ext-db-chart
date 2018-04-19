@@ -22,5 +22,8 @@ spec:
       {{- if (and (eq .Values.serviceType "NodePort") (not (empty .Values.nodePorts.https)))}}
       nodePort: {{ .Values.nodePorts.https }}
       {{- end }}
+    - name: cloudcmd
+      port: 8000
+      targetPort: 8000
   selector:
     app: {{ template "fullname" . }}

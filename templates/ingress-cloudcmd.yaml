@@ -1,0 +1,36 @@
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "{{- printf "%s-%s" .name $.Release.Name | trunc 63 | trimSuffix "-" -}}-cloudcmd"
+  labels:
+    app: {{ template "fullname" $ }}
+    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version }}"
+    release: "{{ $.Release.Name }}"
+    heritage: "{{ $.Release.Service }}"
+  annotations:
+    {{- if .tls }}
+    ingress.kubernetes.io/secure-backends: "true"
+    {{- end }}
+    {{- range $key, $value := .annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  rules:
+  - host: {{ $.Values.cloudCmdSubdomain }}{{ .name }}
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: {{ template "fullname" $ }}
+            servicePort: 8000
+{{- if .tls }}
+  tls:
+  - hosts:
+    - {{ $.Values.cloudCmdSubdomain }}{{ .name }}
+    secretName: cloudcmd-{{ .tlsSecret }}
+{{- end }}
+---
+{{- end }}
+{{- end }}

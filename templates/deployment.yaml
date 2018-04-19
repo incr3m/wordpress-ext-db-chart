@@ -69,25 +69,25 @@ spec:
           containerPort: 80
         - name: https
           containerPort: 443
-        livenessProbe:
-          httpGet:
-            path: /wp-login.php
-          {{- if not .Values.healthcheckHttps }}
-            port: http
-          {{- else }}
-            port: https
-            scheme: HTTPS
-          {{- end }}
-{{ toYaml .Values.livenessProbe | indent 10 }}
-        readinessProbe:
-          httpGet:
-            path: /wp-login.php
-          {{- if not .Values.healthcheckHttps }}
-            port: http
-          {{- else }}
-            port: https
-            scheme: HTTPS
-          {{- end }}
+#         livenessProbe:
+#           httpGet:
+#             path: /wp-login.php
+#           {{- if not .Values.healthcheckHttps }}
+#             port: http
+#           {{- else }}
+#             port: https
+#             scheme: HTTPS
+#           {{- end }}
+# {{ toYaml .Values.livenessProbe | indent 10 }}
+#         readinessProbe:
+#           httpGet:
+#             path: /wp-login.php
+#           {{- if not .Values.healthcheckHttps }}
+#             port: http
+#           {{- else }}
+#             port: https
+#             scheme: HTTPS
+#           {{- end }}
 {{ toYaml .Values.readinessProbe | indent 10 }}
         volumeMounts:
         - mountPath: /bitnami/apache
@@ -101,6 +101,24 @@ spec:
           subPath: php
         resources:
 {{ toYaml .Values.resources | indent 10 }}
+      - name: cloudcmd
+        image: coderaiser/cloudcmd
+        ports:
+        - name: cloudcmd
+          containerPort: 8000
+        env:
+        - name: CLOUDCMD_ROOT
+          value: /mnt/fs
+        - name: CLOUDCMD_AUTH
+          value: "true"
+        - name: CLOUDCMD_USERNAME
+          value: {{ .Values.cloudcmdUsername }}
+        - name: CLOUDCMD_PASSWORD
+          value: {{ .Values.cloudcmdPassword }}
+        volumeMounts:
+        - mountPath: /mnt/fs
+          name: wordpress-data
+          subPath: wordpress
       volumes:
       - name: wordpress-data
       {{- if .Values.persistence.enabled }}
