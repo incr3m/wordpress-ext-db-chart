@@ -1,1 +1,1 @@
-~/helm upgrade --install ba-directory . -f ba-directory.yaml --namespace wordpress
+~/helm upgrade --install ba-directory . -f ba-directory.yaml --namespace wordpress --debug --dry-run

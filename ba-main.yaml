@@ -19,3 +19,6 @@ externalDatabase:
   password: IKblZB3RLNUHaSj5VUkDu4BSbFgTIJMphHYRqeiD
   database: ba_main
   port: 3306
+cloudCmdSubdomain: 'cloudcmd.'
+cloudcmdUsername: admin
+cloudcmdPassword: 1234qwer
